@@ -18,7 +18,7 @@ class LTTableView: UITableView, UIGestureRecognizerDelegate {
         if gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.self) {
             
             let superTableP = gestureRecognizer.location(in: self)
-            if(superTableP.x <= 80) {
+            if(superTableP.x <= 80 && (superTableP.y >  44 + 49 + 185 * self.frame.size.width/375 - self.contentOffset.y)) {
                 let cells = self.visibleCells
                 let content = cells.first?.contentView
                 let pageView = content?.subviews.first as? LTPageView
