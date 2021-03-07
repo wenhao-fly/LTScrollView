@@ -13,7 +13,7 @@
 //
 //  clone地址:  https://github.com/gltwy/LTScrollView.git
 //
-private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
+//private let glt_iphoneX = (UIScreen.main.bounds.height >= 812.0)
 
 import UIKit
 import MJRefresh

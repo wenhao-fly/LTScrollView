@@ -73,15 +73,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             pushVc(LTSimpleManagerDemo(), index: indexPath.row)
             break
-        case 1:
-            pushVc(LTAdvancedManagerDemo(), index: indexPath.row)
-            break
-        case 2:
-            pushVc(LTPersonMainPageDemo(), index: indexPath.row)
-            break
-        case 3:
-            pushVc(LTPageViewDemo(), index: indexPath.row)
-            break
         default:break
         }
     }

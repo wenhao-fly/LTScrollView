@@ -43,6 +43,15 @@ public class LTLayout: NSObject {
      */
     @objc public var isAverage: Bool = false
     
+    /*wh 是否需要平分线 平分线高度 颜色
+         必须isAverage才有平分线
+     */
+    @objc public var isAverageLine: Bool = false
+    
+    @objc public var averageLineHeight: CGFloat = 30.0
+    
+    @objc public var averageLineColor: UIColor? = UIColor.gray
+    
     /* 滑块底部线的高 */
     @objc public var bottomLineHeight: CGFloat = 2.0
     
@@ -290,6 +299,14 @@ extension LTPageView {
             
             let button = subButton(frame: CGRect(x: upX, y: subY, width: subW, height: subH), flag: index, title: titles[index], parentView: sliderScrollView)
             button.setTitleColor(layout.titleColor, for: .normal)
+            
+            if(self.layout.isAverageLine && self.layout.isAverage && index < titles.count-1) {
+                let lineWidth = pageTitleView.bounds.width / CGFloat(titles.count) * CGFloat(index + 1)
+                let lineView = UIView.init(frame: CGRect(x: lineWidth , y: (self.layout.sliderHeight-self.layout.averageLineHeight)/2, width: 1, height: self.layout.averageLineHeight))
+                lineView.backgroundColor = self.layout.averageLineColor;
+                sliderScrollView.addSubview(lineView);
+            }
+            
             
             if index == 0 {
                 button.setTitleColor(layout.titleSelectColor, for: .normal)
