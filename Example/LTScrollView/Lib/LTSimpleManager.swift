@@ -54,6 +54,11 @@
         simpleRefreshTableViewHandle = handle
     }
     
+    /* add禁止左边table手势的index */
+    @objc public func fdoubleIndexArray(array:NSArray) {
+        self.tableView.doubleIndexArray = NSArray.init(array: array)
+    }
+    
     /* 代码设置滚动到第几个位置 */
     @objc public func scrollToIndex(index: Int)  {
         titleView.scrollToIndex(index: index)
