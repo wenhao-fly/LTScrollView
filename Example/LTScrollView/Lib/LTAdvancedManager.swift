@@ -24,7 +24,7 @@ public class LTAdvancedManager: UIView {
     /* 点击切换滚动过程动画 */
     @objc public var isClickScrollAnimation = false {
         didSet {
-            titleView.isClickScrollAnimation = isClickScrollAnimation
+            pageView.isClickScrollAnimation = isClickScrollAnimation
         }
     }
     
@@ -42,11 +42,8 @@ public class LTAdvancedManager: UIView {
     private weak var currentViewController: UIViewController?
     private var pageView: LTPageView!
     private var layout: LTLayout
-    var isCustomTitleView: Bool = false
     
-    private var titleView: LTPageTitleView!
-    
-    @objc public init(frame: CGRect, viewControllers: [UIViewController], titles: [String], currentViewController:UIViewController, layout: LTLayout, titleView: LTPageTitleView? = nil, headerViewHandle handle: () -> UIView) {
+    @objc public init(frame: CGRect, viewControllers: [UIViewController], titles: [String], currentViewController:UIViewController, layout: LTLayout, headerViewHandle handle: () -> UIView) {
         UIScrollView.initializeOnce()
         UICollectionViewFlowLayout.loadOnce()
         self.viewControllers = viewControllers
@@ -56,14 +53,7 @@ public class LTAdvancedManager: UIView {
         super.init(frame: frame)
         UICollectionViewFlowLayout.glt_sliderHeight = layout.sliderHeight
         layout.isSinglePageView = true
-        if titleView != nil {
-            isCustomTitleView = true
-            self.titleView = titleView!
-        }else {
-            self.titleView = setupTitleView()
-        }
-        self.titleView.isCustomTitleView = isCustomTitleView
-        pageView = setupPageViewConfig(currentViewController: currentViewController, layout: layout, titleView: titleView)
+        pageView = setupPageViewConfig(currentViewController: currentViewController, layout: layout)
         setupSubViewsConfig(handle)
     }
     
@@ -77,28 +67,12 @@ public class LTAdvancedManager: UIView {
 }
 
 extension LTAdvancedManager {
-    private func setupTitleView() -> LTPageTitleView {
-        let titleView = LTPageTitleView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: layout.sliderHeight), titles: titles, layout: layout)
-        return titleView
-    }
-}
-
-
-extension LTAdvancedManager {
     //MARK: 创建PageView
-    private func setupPageViewConfig(currentViewController:UIViewController, layout: LTLayout, titleView: LTPageTitleView?) -> LTPageView {
-        let pageView = LTPageView(frame: self.bounds, currentViewController: currentViewController, viewControllers: viewControllers, titles: titles, layout:layout, titleView: titleView)
-        if titles.count != 0 {
-            pageView.glt_createViewController(0)
-        }
-        DispatchQueue.main.after(0.01) {
-            pageView.addSubview(self.titleView)
-            pageView.setupGetPageViewScrollView(pageView, self.titleView)
-        }
+    private func setupPageViewConfig(currentViewController:UIViewController, layout: LTLayout) -> LTPageView {
+        let pageView = LTPageView(frame: self.bounds, currentViewController: currentViewController, viewControllers: viewControllers, titles: titles, layout:layout)
         return pageView
     }
 }
-
 
 extension LTAdvancedManager {
     
@@ -112,7 +86,7 @@ extension LTAdvancedManager {
     }
     
     private func setupSubViews() {
-        titleView.frame.origin.y = kHeaderHeight
+        pageView.pageTitleView.frame.origin.y = kHeaderHeight
         backgroundColor = UIColor.white
         addSubview(pageView)
         setupPageViewDidSelectItem()
@@ -248,6 +222,7 @@ extension LTAdvancedManager {
         
         //记录上一次的偏移量
         currentVC.glt_upOffset = String(describing: scrollView.contentOffset.y)
+        
     }
     
     
@@ -264,7 +239,7 @@ extension LTAdvancedManager {
         let offsetY = contentScrollView.contentOffset.y
         
         //获取当前pageTitleView的Y值
-        var pageTitleViewY = titleView.frame.origin.y
+        var pageTitleViewY = pageView.pageTitleView.frame.origin.y
         
         //pageTitleView从初始位置上升的距离
         let titleViewBottomDistance = offsetY + kHeaderHeight + layout.sliderHeight
@@ -287,7 +262,7 @@ extension LTAdvancedManager {
             }
         }
         
-        titleView.frame.origin.y = pageTitleViewY
+        pageView.pageTitleView.frame.origin.y = pageTitleViewY
         headerView?.frame.origin.y = pageTitleViewY - kHeaderHeight
         let lastDiffTitleToNavOffset = pageTitleViewY - lastDiffTitleToNav
         lastDiffTitleToNav = pageTitleViewY
@@ -302,7 +277,7 @@ extension LTAdvancedManager {
     }
     
     private func distanceBottomOffset() -> CGFloat {
-        return -(titleView.frame.origin.y + layout.sliderHeight)
+        return -(self.pageView.pageTitleView.frame.origin.y + layout.sliderHeight)
     }
 }
 
