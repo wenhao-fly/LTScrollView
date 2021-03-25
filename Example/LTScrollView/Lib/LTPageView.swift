@@ -261,7 +261,7 @@ public class LTPageView: UIView {
 
 extension LTPageView {
     
-    public  func changeTitlesWithArray(titles:[String]) {
+    @objc public  func changeTitlesWithArray(titles:[String]) {
         if titles.count != glt_buttons.count {
             return
         }
