@@ -187,6 +187,9 @@ public class LTPageView: UIView {
         return scrollView
     }()
     
+    deinit {
+        print("delloc")
+    }
     
     @objc public init(frame: CGRect, currentViewController: UIViewController, viewControllers:[UIViewController], titles: [String], layout: LTLayout) {
         self.currentViewController = currentViewController
@@ -203,7 +206,7 @@ public class LTPageView: UIView {
         }
         addSubview(scrollView)
         addSubview(pageTitleView)
-        buttonsLayout()
+        buttonsLayout(isChangeTitles: false)
         pageTitleView.addSubview(sliderScrollView)
         sliderScrollView.addSubview(sliderLineView)
         pageTitleView.addSubview(pageBottomLineView)
@@ -258,8 +261,25 @@ public class LTPageView: UIView {
 
 extension LTPageView {
     
+    public  func changeTitlesWithArray(titles:[String]) {
+        if titles.count != glt_buttons.count {
+            return
+        }
+        self.titles = titles
+        for index in 0..<titles.count {
+            glt_buttons[index].setTitle(titles[index], for: .normal)
+        }
+        for button in glt_buttons {
+            button.removeFromSuperview()
+        }
+        //重置
+        glt_buttons.removeAll()
+        glt_textWidths.removeAll()
+        glt_lineWidths.removeAll()
+        buttonsLayout(isChangeTitles: true)
+    }
     
-    private func buttonsLayout() {
+    private func buttonsLayout(isChangeTitles:Bool) {
         
         if titles.count == 0 { return }
         
@@ -286,8 +306,6 @@ extension LTPageView {
             glt_lineWidths.append(textW)
         }
         
-        
-        
         // 按钮布局
         var upX: CGFloat = layout.lrMargin
         let subH = pageTitleView.bounds.height - (self.layout.bottomLineHeight)
@@ -300,6 +318,7 @@ extension LTPageView {
             let button = subButton(frame: CGRect(x: upX, y: subY, width: subW, height: subH), flag: index, title: titles[index], parentView: sliderScrollView)
             button.setTitleColor(layout.titleColor, for: .normal)
             
+            //标题间加了分割线
             if(self.layout.isAverageLine && self.layout.isAverage && index < titles.count-1) {
                 let lineWidth = pageTitleView.bounds.width / CGFloat(titles.count) * CGFloat(index + 1)
                 let lineView = UIView.init(frame: CGRect(x: lineWidth , y: (self.layout.sliderHeight-self.layout.averageLineHeight)/2, width: 1, height: self.layout.averageLineHeight))
@@ -307,34 +326,36 @@ extension LTPageView {
                 sliderScrollView.addSubview(lineView);
             }
             
-            
-            if index == 0 {
+            if !isChangeTitles {
+                if index == 0 {
+                    createViewController(0)
+                }
+            }
+            if index == glt_currentIndex {
                 button.setTitleColor(layout.titleSelectColor, for: .normal)
-                createViewController(0)
             }
             
             upX = button.frame.origin.x + subW + layout.titleMargin
-            
             glt_buttons.append(button)
             
         }
         
         if layout.isNeedScale {
-            glt_buttons[0].transform = CGAffineTransform(scaleX: layout.scale , y: layout.scale)
+            glt_buttons[glt_currentIndex].transform = CGAffineTransform(scaleX: layout.scale , y: layout.scale)
         }
         
-        // lineView的宽度为第一个的宽度
+        // lineView的宽度
         if layout.sliderWidth == glt_sliderDefaultWidth {
             if layout.isAverage {
-                sliderLineView.frame.size.width = glt_lineWidths[0]
-                sliderLineView.frame.origin.x = (glt_textWidths[0] - glt_lineWidths[0]) * 0.5 + layout.lrMargin
+                sliderLineView.frame.size.width = glt_lineWidths[glt_currentIndex]
+                print(glt_textWidths[glt_currentIndex])
+                sliderLineView.frame.origin.x = glt_buttons[glt_currentIndex].frame.origin.x + (glt_buttons[glt_currentIndex].frame.size.width - glt_lineWidths[glt_currentIndex]) * 0.5
             }else {
-                sliderLineView.frame.size.width = glt_buttons[0].frame.size.width
-                sliderLineView.frame.origin.x = glt_buttons[0].frame.origin.x
+                sliderLineView.frame.size.width = glt_buttons[glt_currentIndex].frame.size.width
+                sliderLineView.frame.origin.x = glt_buttons[glt_currentIndex].frame.origin.x
             }
         }else {
-            sliderLineView.frame.size.width = layout.sliderWidth
-            sliderLineView.frame.origin.x = ((glt_textWidths[0] + layout.lrMargin * 2) - layout.sliderWidth) * 0.5
+            setupSliderLineViewWidth(currentButton: glt_buttons[glt_currentIndex])
         }
         
         if layout.bottomLineCornerRadius != 0.0 {

@@ -36,6 +36,8 @@ class LTSimpleManagerDemo: UIViewController {
         let layout = LTLayout()
         layout.bottomLineHeight = 4.0
         layout.bottomLineCornerRadius = 2.0
+        layout.isAverage = true
+        layout.sliderWidth = 10
         /* 更多属性设置请参考 LTLayout 中 public 属性说明 */
         return layout
     }()
@@ -101,8 +103,9 @@ extension LTSimpleManagerDemo {
         }
         
         //MARK: pageView点击事件
-        simpleManager.didSelectIndexHandle { (index) in
+        simpleManager.didSelectIndexHandle { [weak self] (index) in
             print("点击了 \(index) 😆")
+            
         }
         
     }
@@ -126,6 +129,8 @@ extension LTSimpleManagerDemo: LTSimpleScrollViewDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
                 print("对应控制器的刷新自己玩吧，这里就不做处理了🙂-----\(index)")
                 scrollView?.mj_header.endRefreshing()
+                
+                self.simpleManager.pageView.changeTitlesWithArray(titles: ["刷新","大叔","大大婶","大健康"])
             })
         }
     }
