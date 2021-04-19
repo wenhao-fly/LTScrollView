@@ -52,6 +52,12 @@ public class LTLayout: NSObject {
     
     @objc public var averageLineColor: UIColor? = UIColor.gray
     
+    @objc public var hasCorner: Bool = false
+    //是否圆角背景色
+    @objc public var cornerColor: UIColor? = UIColor.gray
+    
+    @objc public var cornerWidth: CGFloat = 67
+    
     /* 滑块底部线的高 */
     @objc public var bottomLineHeight: CGFloat = 2.0
     
@@ -301,15 +307,26 @@ extension LTPageView {
             let textW = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 8), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : layout.titleFont ?? UIFont.systemFont(ofSize: 16)], context: nil).size.width
             
             if !layout.isAverage {
-                glt_textWidths.append(textW)
+                if(self.layout.hasCorner){
+                    glt_textWidths.append(self.layout.cornerWidth)
+                }else{
+                    glt_textWidths.append(textW)
+                }
             }
             glt_lineWidths.append(textW)
         }
         
         // 按钮布局
         var upX: CGFloat = layout.lrMargin
-        let subH = pageTitleView.bounds.height - (self.layout.bottomLineHeight)
-        let subY: CGFloat = 0
+        var subH: CGFloat = 0
+        var subY: CGFloat = 0
+        if(self.layout.hasCorner){
+            subH = 24.0
+            subY = (pageTitleView.bounds.height - (self.layout.bottomLineHeight))/2 - 12
+        }else{
+            subH = pageTitleView.bounds.height - (self.layout.bottomLineHeight)
+            subY = 0
+        }
         
         for index in 0..<titles.count {
             
@@ -317,6 +334,12 @@ extension LTPageView {
             
             let button = subButton(frame: CGRect(x: upX, y: subY, width: subW, height: subH), flag: index, title: titles[index], parentView: sliderScrollView)
             button.setTitleColor(layout.titleColor, for: .normal)
+            
+            if(self.layout.hasCorner){
+                button.layer.cornerRadius = 12
+                button.backgroundColor = self.layout.cornerColor
+                button.layer.masksToBounds = true
+            }
             
             //标题间加了分割线
             if(self.layout.isAverageLine && self.layout.isAverage && index < titles.count-1) {
