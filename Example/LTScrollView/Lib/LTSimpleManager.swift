@@ -82,7 +82,7 @@
     private var viewControllers: [UIViewController]
     private var titles: [String]
     private weak var currentViewController: UIViewController?
-    private var pageView: LTPageView!
+    @objc public var pageView: LTPageView!
     private var currentSelectIndex: Int = 0
     
     private lazy var tableView: LTTableView = {

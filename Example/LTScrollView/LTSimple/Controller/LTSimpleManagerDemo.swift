@@ -21,7 +21,8 @@ import MJRefresh
 class LTSimpleManagerDemo: UIViewController {
     
     private lazy var titles: [String] = {
-        return ["热门", "精彩推荐", "科技控", "游戏"]
+//        return ["全部(30)", "回放"]
+        return ["热门", "精彩推荐", "科技控", "游戏", "科技控", "游戏"]
     }()
     
     private lazy var viewControllers: [UIViewController] = {
@@ -36,7 +37,15 @@ class LTSimpleManagerDemo: UIViewController {
         let layout = LTLayout()
         layout.bottomLineHeight = 4.0
         layout.bottomLineCornerRadius = 2.0
+        layout.isAverage = false
+        layout.isHiddenSlider = true
         /* 更多属性设置请参考 LTLayout 中 public 属性说明 */
+        
+        layout.titleFont = UIFont.systemFont(ofSize: 12)
+        layout.lrMargin = 15
+        layout.titleMargin = 15
+        layout.hasCorner = false
+        layout.cornerColor = UIColor.gray
         return layout
     }()
     
@@ -101,8 +110,9 @@ extension LTSimpleManagerDemo {
         }
         
         //MARK: pageView点击事件
-        simpleManager.didSelectIndexHandle { (index) in
+        simpleManager.didSelectIndexHandle { [weak self] (index) in
             print("点击了 \(index) 😆")
+            
         }
         
     }
@@ -126,6 +136,8 @@ extension LTSimpleManagerDemo: LTSimpleScrollViewDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
                 print("对应控制器的刷新自己玩吧，这里就不做处理了🙂-----\(index)")
                 scrollView?.mj_header.endRefreshing()
+                
+                self.simpleManager.pageView.changeTitlesWithArray(titles: ["刷新","大叔","大大婶","大健康"])
             })
         }
     }
