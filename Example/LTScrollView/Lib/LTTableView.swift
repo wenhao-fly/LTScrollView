@@ -10,8 +10,10 @@ import UIKit
 
 
 class LTTableView: UITableView, UIGestureRecognizerDelegate {
-    
+    /// 一个vc里包含多个tableview(类似美团)的index数组
     public var doubleIndexArray: NSArray = []
+    /// 利用hittest在手势进入之前，判断手势不在container中时就关闭手势共享，目的：防止header中有滚动控件，造成共同滚动
+    public var tableViewHeaderGesture: Bool = false
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         
@@ -34,15 +36,34 @@ class LTTableView: UITableView, UIGestureRecognizerDelegate {
                     }
                 }
             }
-            return true
+            return tableViewHeaderGesture
         }
         
-        return gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.self)
+        return tableViewHeaderGesture
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
         self.isScrollEnabled = true
+        
+        let cells = self.visibleCells
+        if cells.count == 1 {
+            let content = cells.first?.contentView
+            let pageView = content?.subviews.first as? LTPageView
+            let scr = pageView?.subviews.first
+            if scr!.isKind(of: UIScrollView.self) {
+                //tableView的cell是否包含了“点”
+                let point = scr!.convert(point, from: self)
+                if scr!.layer.contains(point) {
+                    if !tableViewHeaderGesture {
+                        tableViewHeaderGesture = true
+                    }
+                }else{
+                    tableViewHeaderGesture = false
+                }
+            }
+        }
+        
         return hitView
     }
 }

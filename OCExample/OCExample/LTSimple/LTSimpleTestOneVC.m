@@ -78,4 +78,8 @@
     return _tableView;
 }
 
+- (void)dealloc {
+    NSLog(@"%s",__func__);
+}
+
 @end

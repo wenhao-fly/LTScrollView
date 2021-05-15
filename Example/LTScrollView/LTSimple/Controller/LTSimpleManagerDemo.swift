@@ -132,15 +132,17 @@ extension LTSimpleManagerDemo: LTSimpleScrollViewDelegate {
 }
 
 extension LTSimpleManagerDemo {
-    private func testLabel() -> UILabel {
-        let headerView = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 180))
-        headerView.backgroundColor = UIColor.red
-        headerView.text = "点击响应事件"
-        headerView.textColor = UIColor.white
-        headerView.textAlignment = .center
-        headerView.isUserInteractionEnabled = true
-        headerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapLabel(_:))))
-        return headerView
+    private func testLabel() -> UIView {
+        let bgView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 180))
+        
+        let s = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 180))
+        s.contentSize = CGSize(width: 700, height: 180)
+        let c = UIView(frame: CGRect(x: 0, y: 10, width: self.view.bounds.width, height: 160))
+        c.backgroundColor = UIColor.cyan
+        s.addSubview(c)
+        bgView.addSubview(s)
+        
+        return bgView
     }
 }
 

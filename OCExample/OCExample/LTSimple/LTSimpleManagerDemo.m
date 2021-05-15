@@ -28,6 +28,10 @@
 @property(copy, nonatomic) NSArray <NSString *> *titles;
 @property(strong, nonatomic) LTLayout *layout;
 @property(strong, nonatomic) LTSimpleManager *managerView;
+
+@property(strong, nonatomic) UIView *bgView;
+
+@property(strong, nonatomic) UIScrollView *s;
 @end
 
 @implementation LTSimpleManagerDemo
@@ -72,13 +76,30 @@
     
 }
 
+-(UIView *)bgView {
+    if(!_bgView){
+        _bgView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 375,280)];
+        
+        self.s = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 375, 280)];
+        self.s.contentSize = CGSizeMake(750, 80);
+        UIView *t = [[UIView alloc] initWithFrame:CGRectMake(15, 10, 575, 260)];
+        t.backgroundColor = UIColor.cyanColor;
+        [self.s addSubview:t];
+        
+        [_bgView addSubview:self.s];
+    }
+
+    
+    return _bgView;
+}
+
 -(UILabel *)setupHeaderView {
-    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 185)];
+    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,300)];
     headerView.backgroundColor = [UIColor redColor];
+    headerView.userInteractionEnabled = true;
+    [headerView addSubview:self.bgView];
     headerView.text = @"点击响应事件";
-    headerView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
-    [headerView addGestureRecognizer:gesture];
+    ;
     return headerView;
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3DC3F0CF264ECC6C006EA2CF /* BaseScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F0CE264ECC6C006EA2CF /* BaseScrollView.m */; };
 		5C1F2E902087257A002F9B70 /* TestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1F2E8F2087257A002F9B70 /* TestTableViewCell.m */; };
 		5C1F2E9420872772002F9B70 /* LTSimpleManagerDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1F2E9320872772002F9B70 /* LTSimpleManagerDemo.m */; };
 		5C1F2E9D20872CDA002F9B70 /* LTSimpleTestOneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1F2E9C20872CDA002F9B70 /* LTSimpleTestOneVC.m */; };
@@ -50,6 +51,8 @@
 		07F07610025DA4914E3BF9C2 /* Pods-OCExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-OCExample/Pods-OCExample.release.xcconfig"; sourceTree = "<group>"; };
 		2C17311F097F65BC65B3D978 /* Pods_OCExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OCExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F9D6ACF5BDBE2163BF58137 /* Pods-OCExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OCExample/Pods-OCExample.debug.xcconfig"; sourceTree = "<group>"; };
+		3DC3F0CD264ECC6C006EA2CF /* BaseScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseScrollView.h; sourceTree = "<group>"; };
+		3DC3F0CE264ECC6C006EA2CF /* BaseScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseScrollView.m; sourceTree = "<group>"; };
 		4A961C9725B1EF9E3F086215 /* Pods_OCExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OCExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5330EB42381E9AA8393971D0 /* Pods_OCExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OCExampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1F2E7620871F0E002F9B70 /* OCExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OCExample-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 				5C1F2E9320872772002F9B70 /* LTSimpleManagerDemo.m */,
 				5C1F2E9B20872CDA002F9B70 /* LTSimpleTestOneVC.h */,
 				5C1F2E9C20872CDA002F9B70 /* LTSimpleTestOneVC.m */,
+				3DC3F0CD264ECC6C006EA2CF /* BaseScrollView.h */,
+				3DC3F0CE264ECC6C006EA2CF /* BaseScrollView.m */,
 			);
 			path = LTSimple;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				5C1F2E9420872772002F9B70 /* LTSimpleManagerDemo.m in Sources */,
 				5C241E6820871B410022F9CA /* ViewController.m in Sources */,
 				6ABD2BB920E7BDC400473B06 /* LTPageViewTestOneVC.m in Sources */,
+				3DC3F0CF264ECC6C006EA2CF /* BaseScrollView.m in Sources */,
 				5C241E7320871B410022F9CA /* main.m in Sources */,
 				6ABD2BB020E7BDBF00473B06 /* LTPersonalMainPageTestVC.m in Sources */,
 				5C1F2E9D20872CDA002F9B70 /* LTSimpleTestOneVC.m in Sources */,
