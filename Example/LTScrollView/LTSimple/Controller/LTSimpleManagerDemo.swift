@@ -22,7 +22,7 @@ class LTSimpleManagerDemo: UIViewController {
     
     private lazy var titles: [String] = {
 //        return ["全部(30)", "回放"]
-        return ["热门", "精彩推荐", "科技控", "游戏", "科技控", "游戏"]
+        return ["热门", "精彩推荐", "科技控", "游戏", "科技控", "游戏", "精彩推荐", "科技控", "精彩推荐", "科技控"]
     }()
     
     private lazy var viewControllers: [UIViewController] = {

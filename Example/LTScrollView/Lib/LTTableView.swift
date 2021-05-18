@@ -52,9 +52,9 @@ class LTTableView: UITableView, UIGestureRecognizerDelegate {
             let pageView = content?.subviews.first as? LTPageView
             let scr = pageView?.subviews.first
             if scr!.isKind(of: UIScrollView.self) {
-                //tableView的cell是否包含了“点”
+                //tableView的cell是否包含了“点” 而且标题栏也滚动
                 let point = scr!.convert(point, from: self)
-                if scr!.layer.contains(point) {
+                if scr!.layer.contains(point) && point.y > 44.0 {
                     if !tableViewHeaderGesture {
                         tableViewHeaderGesture = true
                     }
