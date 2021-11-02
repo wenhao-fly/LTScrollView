@@ -22,7 +22,7 @@ class LTSimpleManagerDemo: UIViewController {
     
     private lazy var titles: [String] = {
 //        return ["全部(30)", "回放"]
-        return ["热门", "精彩推荐", "科技控", "游戏", "科技控", "游戏", "精彩推荐", "科技控", "精彩推荐", "科技控"]
+        return ["热门", "精彩推荐科技控科技控", "科", "科技控", "游戏", "精彩推荐", "科技控", "精彩推荐", "科技控"]
     }()
     
     private lazy var viewControllers: [UIViewController] = {
@@ -37,15 +37,17 @@ class LTSimpleManagerDemo: UIViewController {
         let layout = LTLayout()
         layout.bottomLineHeight = 4.0
         layout.bottomLineCornerRadius = 2.0
-        layout.isAverage = false
         layout.isHiddenSlider = true
         /* 更多属性设置请参考 LTLayout 中 public 属性说明 */
-        
         layout.titleFont = UIFont.systemFont(ofSize: 12)
         layout.lrMargin = 15
         layout.titleMargin = 15
-        layout.hasCorner = false
-        layout.cornerColor = UIColor.gray
+        
+        layout.isNeedScale = false;
+        layout.isAverage = false
+        layout.hasCorner = true
+        layout.cornerBgColor = UIColor.gray
+        layout.cornerSelectBgColor = UIColor.cyan
         return layout
     }()
     
