@@ -54,9 +54,9 @@ public class LTLayout: NSObject {
     
     @objc public var hasCorner: Bool = false
     //有圆角时 圆角背景色
-    @objc public var cornerBgColor: UIColor? = UIColor.lightGray
+    @objc public var cornerBgColor: UIColor? = UIColor.clear
     
-    @objc public var cornerSelectBgColor: UIColor? = UIColor.gray
+    @objc public var cornerSelectBgColor: UIColor? = UIColor.clear
     
     @objc public var cornerWidth: CGFloat = 67
     
@@ -358,7 +358,9 @@ extension LTPageView {
             }
             if index == glt_currentIndex {
                 button.setTitleColor(layout.titleSelectColor, for: .normal)
-                button.backgroundColor = self.layout.cornerSelectBgColor
+                if(self.layout.hasCorner){
+                    button.backgroundColor = self.layout.cornerSelectBgColor
+                }
             }
             
             upX = button.frame.origin.x + subW + layout.titleMargin
@@ -566,7 +568,9 @@ extension LTPageView {
                     button.transform = CGAffineTransform(scaleX: layout.scale , y: layout.scale)
                 }
                 button.setTitleColor(self.layout.titleSelectColor, for: .normal)
-                button.backgroundColor = self.layout.cornerSelectBgColor
+                if(self.layout.hasCorner){
+                    button.backgroundColor = self.layout.cornerSelectBgColor
+                }
             }else {
                 if layout.isNeedScale {
                     button.transform = CGAffineTransform(scaleX: 1.0 , y: 1.0)
@@ -581,8 +585,10 @@ extension LTPageView {
     private func setupButtonStatusAnimation(upButton: UIButton, currentButton: UIButton)  {
         upButton.setTitleColor(layout.titleColor, for: .normal)
         currentButton.setTitleColor(layout.titleSelectColor, for: .normal)
-        upButton.backgroundColor = self.layout.cornerBgColor
-        currentButton.backgroundColor = self.layout.cornerSelectBgColor
+        if(self.layout.hasCorner){
+            upButton.backgroundColor = self.layout.cornerBgColor
+            currentButton.backgroundColor = self.layout.cornerSelectBgColor
+        }
     }
     
     //MARK: 让title的ScrollView滚动到中心点位置
