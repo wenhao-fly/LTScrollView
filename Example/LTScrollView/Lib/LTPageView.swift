@@ -309,7 +309,7 @@ extension LTPageView {
                 }
             }
             
-            let textW = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 8), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : layout.titleFont ?? UIFont.systemFont(ofSize: 16)], context: nil).size.width
+            let textW = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 8), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : layout.titleSelectFont ?? UIFont.boldSystemFont(ofSize: 17)], context: nil).size.width
             
             if !layout.isAverage {
                 if(self.layout.hasCorner){
