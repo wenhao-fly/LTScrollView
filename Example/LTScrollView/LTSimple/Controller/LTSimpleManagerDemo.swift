@@ -40,12 +40,11 @@ class LTSimpleManagerDemo: UIViewController {
 //        layout.isHiddenSlider = true
         /* 更多属性设置请参考 LTLayout 中 public 属性说明 */
         layout.titleFont = UIFont.systemFont(ofSize: 15)
-        layout.titleSelectFont = UIFont.boldSystemFont(ofSize: 17)
         layout.lrMargin = 15
         layout.titleMargin = 15
         layout.sliderWidth = 22
         
-        layout.isNeedScale = false;
+        layout.isNeedScale = true;
         layout.isAverage = false
 //        layout.hasCorner = true  //圆角
 //        layout.cornerBgColor = UIColor.gray
@@ -88,6 +87,10 @@ class LTSimpleManagerDemo: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         view.addSubview(simpleManager)
         simpleManagerConfig()
+        
+        let button = simpleManager.pageView.glt_buttons.first;
+        button?.setTitle("123", for: .normal);
+        
     }
     
     override func didReceiveMemoryWarning() {
