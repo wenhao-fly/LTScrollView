@@ -183,7 +183,7 @@ public class LTPageView: UIView {
         return sliderScrollView
     }()
     
-    private lazy var scrollView: UIScrollView = {
+    @objc public lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height))
         scrollView.contentSize = CGSize(width: self.bounds.width * CGFloat(self.titles.count), height: 0)
         scrollView.tag = 302

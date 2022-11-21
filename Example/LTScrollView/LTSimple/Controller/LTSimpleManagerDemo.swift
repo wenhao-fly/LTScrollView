@@ -88,9 +88,12 @@ class LTSimpleManagerDemo: UIViewController {
         view.addSubview(simpleManager)
         simpleManagerConfig()
         
-        let button = simpleManager.pageView.glt_buttons.first;
-        button?.setTitle("123", for: .normal);
+        //获取所以titles 加角标
+        let button = simpleManager.pageView.glt_buttons.first
+        button?.setTitle("123", for: .normal)
         
+        //编辑时 禁止滑动
+//        simpleManager.pageView.scrollView.isScrollEnabled = false
     }
     
     override func didReceiveMemoryWarning() {
