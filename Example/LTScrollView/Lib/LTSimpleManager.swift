@@ -62,6 +62,11 @@
     @objc public func scrollToIndex(index: Int)  {
         pageView.scrollToIndex(index: index)
     }
+     
+     /* 改变整个view颜色 */
+     @objc public func changeBackgroundColor(backgroundColor: UIColor)  {
+         tableView.backgroundColor = backgroundColor;
+     }
     
     /* 点击切换滚动过程动画  */
     @objc public var isClickScrollAnimation = false {
