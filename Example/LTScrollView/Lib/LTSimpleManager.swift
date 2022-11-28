@@ -55,7 +55,7 @@
     
     /* add禁止左边table手势的index */
     @objc public func fdoubleIndexArray(array:NSArray) {
-        self.tableView.doubleIndexArray = NSArray.init(array: array)
+//        self.tableView.doubleIndexArray = NSArray.init(array: array)
     }
     
     /* 代码设置滚动到第几个位置 */
@@ -64,8 +64,13 @@
     }
      
      /* 改变整个view颜色 */
-     @objc public func changeBackgroundColor(backgroundColor: UIColor)  {
-         tableView.backgroundColor = backgroundColor;
+     @objc public func changeBackgroundColor(color: UIColor)  {
+         tableView.backgroundColor = color;
+     }
+     
+     /* 改变整个view颜色 */
+     @objc public func scrollEnabled(enabled: Bool)  {
+         tableView.isScrollEnabled = enabled;
      }
     
     /* 点击切换滚动过程动画  */

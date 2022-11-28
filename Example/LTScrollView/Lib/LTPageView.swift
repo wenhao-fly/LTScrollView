@@ -191,7 +191,7 @@ public class LTPageView: UIView {
         scrollView.delegate = self
         scrollView.bounces = layout.isShowBounces
         scrollView.isScrollEnabled = layout.isScrollEnabled
-        scrollView.showsHorizontalScrollIndicator = layout.showsHorizontalScrollIndicator
+        scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
     

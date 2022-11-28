@@ -89,7 +89,9 @@ class LTSimpleManagerDemo: UIViewController {
         simpleManagerConfig()
         
         //改变背景颜色
-        simpleManager.changeBackgroundColor(backgroundColor: UIColor.red);
+        simpleManager.changeBackgroundColor(color: UIColor.red)
+//        simpleManager.scrollEnabled(enabled: false)
+        
         //获取所以titles 加角标
         let button = simpleManager.pageView.glt_buttons.first
         button?.setTitle("123", for: .normal)
