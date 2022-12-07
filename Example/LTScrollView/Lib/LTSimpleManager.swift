@@ -68,9 +68,14 @@
          tableView.backgroundColor = color;
      }
      
-     /* 改变整个view颜色 */
+     /* 是否tableView上下滚动  */
      @objc public func scrollEnabled(enabled: Bool)  {
          tableView.isScrollEnabled = enabled;
+     }
+     
+     /* 是否tableView弹性  */
+     @objc public func bouncesEnabled(enabled: Bool)  {
+         tableView.bounces = enabled;
      }
     
     /* 点击切换滚动过程动画  */
