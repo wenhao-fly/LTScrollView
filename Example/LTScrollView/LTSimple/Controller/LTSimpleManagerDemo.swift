@@ -96,6 +96,13 @@ class LTSimpleManagerDemo: UIViewController {
         let button = simpleManager.pageView.glt_buttons.first
         button?.setTitle("123", for: .normal)
         
+        //改变tableview高度
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 3.5, execute: {
+            print("1 second after")
+//            self.simpleManager.glt_tableViewHeight = 500;
+        })
+        
+        
         //编辑时 禁止滑动
 //        simpleManager.pageView.scrollView.isScrollEnabled = false
     }

@@ -40,6 +40,13 @@
             tableView.tableHeaderView = headerView
         }
     }
+     
+    /* 动态改变glt_tableViewHeight的高度 */
+    @objc public var glt_tableViewHeight: CGFloat = 0.0 {
+        didSet {
+            tableView.frame.size.height = glt_tableViewHeight
+        }
+    }
     
     public typealias LTSimpleDidSelectIndexHandle = (Int) -> Void
     @objc public var sampleDidSelectIndexHandle: LTSimpleDidSelectIndexHandle?
