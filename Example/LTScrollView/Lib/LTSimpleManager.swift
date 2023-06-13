@@ -91,6 +91,11 @@
             pageView.isClickScrollAnimation = isClickScrollAnimation
         }
     }
+     
+     /* tableview滚动到遮住head */
+     @objc public func scrollToHideHeader()  {
+         tableView.setContentOffset(CGPoint(x: 0, y: kHeaderHeight), animated: true)
+     }
     
     //设置悬停位置Y值
     @objc public var hoverY: CGFloat = 0

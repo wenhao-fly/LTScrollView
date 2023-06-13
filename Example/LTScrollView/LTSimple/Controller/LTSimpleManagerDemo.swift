@@ -97,10 +97,13 @@ class LTSimpleManagerDemo: UIViewController {
         button?.setTitle("123", for: .normal)
         
         //改变tableview高度
-        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 3.5, execute: {
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1.0, execute: {
             print("1 second after")
 //            self.simpleManager.glt_tableViewHeight = 500;
+            self.simpleManager.scrollToHideHeader() //定位tableview滚动到某一个位置
         })
+        
+//        simpleManager.scrollToIndex(index: 2)
         
         
         //编辑时 禁止滑动
