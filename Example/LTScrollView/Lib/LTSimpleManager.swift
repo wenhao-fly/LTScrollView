@@ -44,10 +44,22 @@
     /* 动态改变整个的高度 */
     @objc public var glt_tableViewHeight: CGFloat = 0.0 {
         didSet {
-            self.mj_h = glt_tableViewHeight
-            tableView.frame.size.height = glt_tableViewHeight
-            pageView.mj_h = glt_tableViewHeight
-            pageView.scrollView.mj_h = glt_tableViewHeight
+            var selfFrame = self.frame
+            selfFrame.size.height = glt_tableViewHeight
+            self.frame = selfFrame
+            
+            var tableViewFrame = tableView.frame
+            tableViewFrame.size.height = glt_tableViewHeight
+            tableView.frame = tableViewFrame
+            
+            var pageViewFrame = pageView.frame
+            pageViewFrame.size.height = glt_tableViewHeight
+            pageView.frame = pageViewFrame
+            
+            var pageViewScrollViewFrame = pageView.scrollView.frame
+            pageViewScrollViewFrame.size.height = glt_tableViewHeight
+            pageView.scrollView.frame = pageViewScrollViewFrame
+            
             tableView.reloadData()
         }
     }

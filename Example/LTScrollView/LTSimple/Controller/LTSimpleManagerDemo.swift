@@ -55,7 +55,7 @@ class LTSimpleManagerDemo: UIViewController {
     private func managerReact() -> CGRect {
         let statusBarH = UIApplication.shared.statusBarFrame.size.height
         let Y: CGFloat = statusBarH + 44
-        let H: CGFloat = glt_iphoneX ? (view.bounds.height - Y - 34) : view.bounds.height - Y
+        let H: CGFloat = glt_iphoneX ? (view.bounds.height - Y - 34) : view.bounds.height - Y - 200
         return CGRect(x: 0, y: Y, width: view.bounds.width, height: H)
     }
     
@@ -102,7 +102,7 @@ class LTSimpleManagerDemo: UIViewController {
             //改变整个高度
             let statusBarH = UIApplication.shared.statusBarFrame.size.height
             let Y: CGFloat = statusBarH + 44
-            self.simpleManager.glt_tableViewHeight = self.view.bounds.height - Y - 200;
+            self.simpleManager.glt_tableViewHeight = self.view.bounds.height - Y;
             //定位tableview滚动到某一个位置
 //            self.simpleManager.scrollToHideHeader()
         })
