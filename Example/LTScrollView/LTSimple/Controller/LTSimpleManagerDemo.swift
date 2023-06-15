@@ -99,8 +99,12 @@ class LTSimpleManagerDemo: UIViewController {
         //改变tableview高度
         DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1.0, execute: {
             print("1 second after")
-//            self.simpleManager.glt_tableViewHeight = 500;
-            self.simpleManager.scrollToHideHeader() //定位tableview滚动到某一个位置
+            //改变整个高度
+            let statusBarH = UIApplication.shared.statusBarFrame.size.height
+            let Y: CGFloat = statusBarH + 44
+            self.simpleManager.glt_tableViewHeight = self.view.bounds.height - Y - 200;
+            //定位tableview滚动到某一个位置
+//            self.simpleManager.scrollToHideHeader()
         })
         
 //        simpleManager.scrollToIndex(index: 2)
