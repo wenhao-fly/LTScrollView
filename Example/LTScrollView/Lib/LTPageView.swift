@@ -234,6 +234,11 @@ public class LTPageView: UIView {
             index = 0
         }
         
+        if(glt_buttons.count == 0) {
+            print("titles为空数组...")
+            return
+        }
+        
         if isClickScrollAnimation {
             
             let nextButton = glt_buttons[index]

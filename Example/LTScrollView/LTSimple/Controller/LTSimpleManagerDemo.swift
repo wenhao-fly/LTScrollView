@@ -89,6 +89,7 @@ class LTSimpleManagerDemo: UIViewController {
         simpleManagerConfig()
         
         //改变背景颜色
+        simpleManager.isClickScrollAnimation = true
         simpleManager.changeBackgroundColor(color: UIColor.red)
 //        simpleManager.scrollEnabled(enabled: false)
         
@@ -107,7 +108,7 @@ class LTSimpleManagerDemo: UIViewController {
 //            self.simpleManager.scrollToHideHeader()
         })
         
-//        simpleManager.scrollToIndex(index: 2)
+        simpleManager.scrollToIndex(index: 1)
         
         
         //编辑时 禁止滑动
