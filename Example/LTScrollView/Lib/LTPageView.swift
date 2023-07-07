@@ -28,6 +28,9 @@ public class LTLayout: NSObject {
     /* 普通标题字号 */
     @objc public var titleFont: UIFont? = UIFont.systemFont(ofSize: 15)
     
+    /* 选中标题字号 */
+    @objc public var titleSelectFont: UIFont? = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
+    
     /* 滑块底部线的颜色 - UIColor.blue */
     @objc public var bottomLineColor: UIColor? = UIColor.red
     
@@ -311,7 +314,7 @@ extension LTPageView {
                 }
             }
             
-            let textW = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 8), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : layout.titleFont ?? UIFont.systemFont(ofSize: 16)], context: nil).size.width
+            let textW = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 8), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : layout.titleSelectFont ?? UIFont.systemFont(ofSize: 16)], context: nil).size.width
             
             if !layout.isAverage {
                 if(self.layout.hasCorner){
@@ -364,6 +367,7 @@ extension LTPageView {
             }
             if index == glt_currentIndex {
                 button.setTitleColor(layout.titleSelectColor, for: .normal)
+                button.titleLabel?.font = layout.titleSelectFont
                 if(self.layout.hasCorner){
                     button.backgroundColor = self.layout.cornerSelectBgColor
                 }
@@ -574,6 +578,7 @@ extension LTPageView {
                     button.transform = CGAffineTransform(scaleX: layout.scale , y: layout.scale)
                 }
                 button.setTitleColor(self.layout.titleSelectColor, for: .normal)
+                button.titleLabel?.font = layout.titleSelectFont
                 if(self.layout.hasCorner){
                     button.backgroundColor = self.layout.cornerSelectBgColor
                 }
@@ -582,6 +587,7 @@ extension LTPageView {
                     button.transform = CGAffineTransform(scaleX: 1.0 , y: 1.0)
                 }
                 button.setTitleColor(self.layout.titleColor, for: .normal)
+                button.titleLabel?.font = layout.titleFont
                 button.backgroundColor = self.layout.cornerBgColor
             }
         }
@@ -590,7 +596,9 @@ extension LTPageView {
     
     private func setupButtonStatusAnimation(upButton: UIButton, currentButton: UIButton)  {
         upButton.setTitleColor(layout.titleColor, for: .normal)
+        upButton.titleLabel?.font = layout.titleFont
         currentButton.setTitleColor(layout.titleSelectColor, for: .normal)
+        currentButton.titleLabel?.font = layout.titleSelectFont
         if(self.layout.hasCorner){
             upButton.backgroundColor = self.layout.cornerBgColor
             currentButton.backgroundColor = self.layout.cornerSelectBgColor
@@ -693,6 +701,15 @@ extension LTPageView {
             let scaleDelta = (layout.scale - 1.0) * progress
             currentButton.transform = CGAffineTransform(scaleX: layout.scale - scaleDelta, y: layout.scale - scaleDelta)
             nextButton.transform = CGAffineTransform(scaleX: 1.0 + scaleDelta, y: 1.0 + scaleDelta)
+            //同时改成字体大小
+            if(progress > 0.5) {
+                currentButton.titleLabel?.font = layout.titleFont
+                nextButton.titleLabel?.font = layout.titleSelectFont
+            }else {
+                currentButton.titleLabel?.font = layout.titleSelectFont
+                nextButton.titleLabel?.font = layout.titleFont
+                
+            }
         }
         
         // 判断是否是自定义Slider的宽度（这里指没有自定义）

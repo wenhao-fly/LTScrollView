@@ -22,7 +22,7 @@ class LTSimpleManagerDemo: UIViewController {
     
     private lazy var titles: [String] = {
 //        return ["全部(30)", "回放"]
-        return ["热门", "精彩推荐科技控科技控", "主旨报告", "科技控", "游戏", "精彩推荐", "科技控", "精彩推荐", "科技控"]
+        return ["热门", "精彩推荐", "主旨报告", "科技控", "游戏", "精彩推荐", "科技控", "精彩推荐", "科技控"]
     }()
     
     private lazy var viewControllers: [UIViewController] = {
@@ -40,6 +40,7 @@ class LTSimpleManagerDemo: UIViewController {
 //        layout.isHiddenSlider = true
         /* 更多属性设置请参考 LTLayout 中 public 属性说明 */
         layout.titleFont = UIFont.systemFont(ofSize: 15)
+        layout.titleSelectFont = UIFont.boldSystemFont(ofSize: 15) //增加了选中的字体
         layout.lrMargin = 15
         layout.titleMargin = 15
         layout.sliderWidth = 22
@@ -111,7 +112,7 @@ class LTSimpleManagerDemo: UIViewController {
         simpleManager.scrollToIndex(index: 1)
         
         
-        //编辑时 禁止滑动
+        //编辑时 禁止左右滑动
 //        simpleManager.pageView.scrollView.isScrollEnabled = false
     }
     
