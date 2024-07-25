@@ -86,9 +86,17 @@
         pageView.scrollToIndex(index: index)
     }
      
-     /* 改变整个view颜色 */
+     /* 改变整个view颜色 即tableView颜色*/
      @objc public func changeBackgroundColor(color: UIColor)  {
          tableView.backgroundColor = color;
+     }
+     
+     /* 改变下部分view颜色 */
+     @objc public func changeCellBackgroundColor(color: UIColor)  {
+         if(0 < tableView.numberOfRows(inSection: 0)) {
+             let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+             cell?.contentView.backgroundColor = color
+         }
      }
      
      /* 是否tableView上下滚动  */
