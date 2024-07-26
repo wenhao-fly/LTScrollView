@@ -169,7 +169,7 @@
  extension LTSimpleManager {
     
     private func createPageViewConfig(currentViewController:UIViewController, layout: LTLayout) -> LTPageView {
-        let pageView = LTPageView(frame: self.bounds, currentViewController: currentViewController, viewControllers: viewControllers, titles: titles, layout:layout)
+        let pageView = LTPageView(frame: CGRect(x: layout.lrCellMargin, y: 0, width: self.bounds.width-2*layout.lrCellMargin, height: self.bounds.height), currentViewController: currentViewController, viewControllers: viewControllers, titles: titles, layout:layout)
         pageView.delegate = self
         return pageView
     }

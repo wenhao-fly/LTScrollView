@@ -105,6 +105,9 @@ public class LTLayout: NSObject {
     /* pageView的内容ScrollView是否显示HorizontalScrollIndicator */
     @objc public var showsHorizontalScrollIndicator: Bool = true
     
+    /* 整个pageView距离cell最左边和最右边的距离 */
+    @objc public var lrCellMargin: CGFloat = 0
+    
     /* 内部使用-外界不要调用 */
     var isSinglePageView: Bool = false
 }

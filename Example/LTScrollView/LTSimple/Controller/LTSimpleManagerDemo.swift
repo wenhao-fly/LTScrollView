@@ -50,6 +50,7 @@ class LTSimpleManagerDemo: UIViewController {
 //        layout.hasCorner = true  //圆角
 //        layout.cornerBgColor = UIColor.gray
 //        layout.cornerSelectBgColor = UIColor.cyan
+        layout.lrCellMargin = 15
         return layout
     }()
     
