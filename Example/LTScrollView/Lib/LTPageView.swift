@@ -181,7 +181,7 @@ public class LTPageView: UIView {
         return pageBottomLineView
     }()
     
-    private lazy var sliderScrollView: UIScrollView = {
+    @objc public lazy var sliderScrollView: UIScrollView = {
         let sliderScrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: pageTitleView.bounds.width, height: pageTitleView.bounds.height))
         sliderScrollView.tag = 403
         sliderScrollView.showsHorizontalScrollIndicator = false
