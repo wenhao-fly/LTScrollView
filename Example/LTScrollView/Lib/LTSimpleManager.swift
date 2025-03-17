@@ -122,11 +122,11 @@
      }
      
      /* tableview滚动顶部 */
-     @objc public func scrollToTop()  {
-         isCanScrollToTop = true;
+     @objc public func needScrollToTop()  {
+         isNeedScrollToTop = true;
          tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-         DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1.5, execute: { [self] in
-             isCanScrollToTop = false
+         DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1.0, execute: { [self] in
+             isNeedScrollToTop = false
          })
      }
     
@@ -134,7 +134,7 @@
     @objc public var hoverY: CGFloat = 0
      
      //设置滚动到顶部
-     @objc public var isCanScrollToTop: Bool = false
+     @objc public var isNeedScrollToTop: Bool = false
     
     /* LTSimple的scrollView上下滑动监听 */
     @objc public weak var delegate: LTSimpleScrollViewDelegate?
@@ -267,24 +267,24 @@
      * 当滑动内容ScrollView的时候， 当内容contentOffset.y 大于 0（说明滑动的是内容ScrollView） 或者 当底部tableview的contentOffset.y大于 header的高度的时候，将底部tableView的偏移量设置为kHeaderHeight， 并将其他的scrollView的contentOffset置为.zero
      */
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(isCanScrollToTop)
-        if(isCanScrollToTop) {
+        //需要滚动到顶部 防止滚动期间下面的条件导致滚动不了
+        if(isNeedScrollToTop) {
             for viewController in viewControllers {
                 guard viewController.glt_scrollView != scrollView else { continue }
                 viewController.glt_scrollView?.contentOffset = .zero
             }
-            return
-        }
-        delegate?.glt_scrollViewDidScroll?(scrollView)
-        guard scrollView == tableView, let contentTableView = contentTableView else { return }
-        let offsetY = scrollView.contentOffset.y
-        if contentTableView.contentOffset.y > 0 || offsetY > kHeaderHeight - hoverY {
-            tableView.contentOffset = CGPoint(x: 0.0, y: kHeaderHeight - hoverY)
-        }
-        if scrollView.contentOffset.y < kHeaderHeight - hoverY {
-            for viewController in viewControllers {
-                guard viewController.glt_scrollView != scrollView else { continue }
-                viewController.glt_scrollView?.contentOffset = .zero
+        }else {
+            delegate?.glt_scrollViewDidScroll?(scrollView)
+            guard scrollView == tableView, let contentTableView = contentTableView else { return }
+            let offsetY = scrollView.contentOffset.y
+            if contentTableView.contentOffset.y > 0 || offsetY > kHeaderHeight - hoverY {
+                tableView.contentOffset = CGPoint(x: 0.0, y: kHeaderHeight - hoverY)
+            }
+            if scrollView.contentOffset.y < kHeaderHeight - hoverY {
+                for viewController in viewControllers {
+                    guard viewController.glt_scrollView != scrollView else { continue }
+                    viewController.glt_scrollView?.contentOffset = .zero
+                }
             }
         }
     }

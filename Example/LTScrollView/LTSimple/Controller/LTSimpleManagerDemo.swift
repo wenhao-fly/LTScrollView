@@ -106,8 +106,8 @@ class LTSimpleManagerDemo: UIViewController {
 //            let statusBarH = UIApplication.shared.statusBarFrame.size.height
 //            let Y: CGFloat = statusBarH + 44
 //            self.simpleManager.glt_tableViewHeight = self.view.bounds.height - Y;
-            //定位tableview滚动到某一个位置
-            self.simpleManager.scrollToTop()
+            //tableview滚动到顶部
+            self.simpleManager.needScrollToTop()
         })
         
         simpleManager.scrollToIndex(index: 1)
