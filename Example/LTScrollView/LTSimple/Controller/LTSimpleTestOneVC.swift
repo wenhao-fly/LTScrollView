@@ -45,9 +45,9 @@ class LTSimpleTestOneVC: UIViewController, LTTableViewProtocal {
             self.automaticallyAdjustsScrollViewInsets = false
         }
         
-        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1.5, execute: {
-            self.tableView.setContentOffset(CGPoint(x: 0, y: 300), animated: true)
-        })
+//        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1.5, execute: {
+//            self.tableView.setContentOffset(CGPoint(x: 0, y: 300), animated: true)
+//        })
         
     }
 }

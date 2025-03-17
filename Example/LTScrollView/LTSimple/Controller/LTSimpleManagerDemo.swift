@@ -95,19 +95,19 @@ class LTSimpleManagerDemo: UIViewController {
         simpleManager.changeBackgroundColor(color: UIColor.red)
 //        simpleManager.scrollEnabled(enabled: false)
         
-        //获取所以titles 加角标
+        //获取所有titles 改名字
         let button = simpleManager.pageView.glt_buttons.first
         button?.setTitle("123", for: .normal)
         
         //改变tableview高度
-        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 1.0, execute: {
-            print("1 second after")
+        DispatchQueue.main.asyncAfter(wallDeadline: .now() + 5.0, execute: {
+            print("5 second after")
             //改变整个高度
-            let statusBarH = UIApplication.shared.statusBarFrame.size.height
-            let Y: CGFloat = statusBarH + 44
-            self.simpleManager.glt_tableViewHeight = self.view.bounds.height - Y;
+//            let statusBarH = UIApplication.shared.statusBarFrame.size.height
+//            let Y: CGFloat = statusBarH + 44
+//            self.simpleManager.glt_tableViewHeight = self.view.bounds.height - Y;
             //定位tableview滚动到某一个位置
-//            self.simpleManager.scrollToHideHeader()
+            self.simpleManager.scrollToTop()
         })
         
         simpleManager.scrollToIndex(index: 1)
